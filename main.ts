@@ -22,7 +22,7 @@ input.onButtonPressed(Button.B, function on_button_pressed_b() {
     }
     
 })
-input.onPinPressed(TouchPin.P0, function on_pin_pressed_p0() {
+input.onPinReleased(TouchPin.P0, function on_pin_released_p0() {
     
     if (Lock != "C") {
         radio.sendValue("answer", 67)
@@ -33,7 +33,7 @@ input.onPinPressed(TouchPin.P0, function on_pin_pressed_p0() {
     }
     
 })
-input.onPinPressed(TouchPin.P1, function on_pin_pressed_p1() {
+input.onPinReleased(TouchPin.P1, function on_pin_released_p1() {
     
     if (Lock != "D") {
         radio.sendValue("answer", 68)
@@ -44,7 +44,7 @@ input.onPinPressed(TouchPin.P1, function on_pin_pressed_p1() {
     }
     
 })
-input.onPinPressed(TouchPin.P2, function on_pin_pressed_p2() {
+input.onPinReleased(TouchPin.P2, function on_pin_released_p2() {
     
     if (Lock != "E") {
         radio.sendValue("answer", 69)

@@ -22,7 +22,7 @@ def on_button_pressed_b():
         basic.show_string(Lock)
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-def on_pin_pressed_p0():
+def on_pin_released_p0():
     global Lock
     if Lock != "C":
         radio.send_value("answer", 67)
@@ -30,9 +30,9 @@ def on_pin_pressed_p0():
         basic.show_string(Lock)
     elif Lock == "C":
         basic.show_string(Lock)
-input.on_pin_pressed(TouchPin.P0, on_pin_pressed_p0)
+input.on_pin_released(TouchPin.P0, on_pin_released_p0)
 
-def on_pin_pressed_p1():
+def on_pin_released_p1():
     global Lock
     if Lock != "D":
         radio.send_value("answer", 68)
@@ -40,9 +40,9 @@ def on_pin_pressed_p1():
         basic.show_string(Lock)
     elif Lock == "D":
         basic.show_string(Lock)
-input.on_pin_pressed(TouchPin.P1, on_pin_pressed_p1)
+input.on_pin_released(TouchPin.P1, on_pin_released_p1)
 
-def on_pin_pressed_p2():
+def on_pin_released_p2():
     global Lock
     if Lock != "E":
         radio.send_value("answer", 69)
@@ -50,4 +50,4 @@ def on_pin_pressed_p2():
         basic.show_string(Lock)
     elif Lock == "E":
         basic.show_string(Lock)
-input.on_pin_pressed(TouchPin.P2, on_pin_pressed_p2)
+input.on_pin_released(TouchPin.P2, on_pin_released_p2)
