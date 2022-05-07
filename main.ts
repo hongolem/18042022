@@ -1,16 +1,24 @@
+// dodělat odesílání hodnoty (Decision/Answer); předělat Server podle klienta
 radio.setGroup(100)
-let Lock = ""
+let Decision = ""
 let Server_running = false
-radio.onReceivedString(function on_received_string(receivedString: string) {
+let Answer = 64
+radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     
-    basic.showString(receivedString)
-    Server_running = true
+    if (receivedNumber == 1) {
+        basic.showString("Start!")
+        Server_running = true
+        radio.sendString("" + control.deviceSerialNumber())
+    } else if (receivedNumber == 0) {
+        basic.showString("End!")
+        Server_running = false
+        radio.sendValue("" + control.deviceSerialNumber(), Answer)
+    }
+    
 })
 function Voting(Decision: string) {
-    
     if (Server_running == true) {
-        Lock = Decision
-        basic.showString(Lock)
+        basic.showString(Decision)
     } else if (Server_running == false) {
         basic.showString("Hlasování nezačalo!")
     }

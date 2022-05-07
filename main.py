@@ -1,19 +1,26 @@
+#dodělat odesílání hodnoty (Decision/Answer); předělat Server podle klienta
+
 radio.set_group(100)
 
-Lock = ""
+Decision = ""
 Server_running = False
+Answer = 64
 
-def on_received_string(receivedString):
+def on_received_number(receivedNumber):
     global Server_running
-    basic.show_string(receivedString)
-    Server_running = True
-radio.on_received_string(on_received_string)
+    if receivedNumber == 1:
+        basic.show_string("Start!")
+        Server_running = True
+        radio.send_string(str(control.device_serial_number()))
+    elif receivedNumber == 0:
+        basic.show_string("End!")
+        Server_running = False
+        radio.send_value(str(control.device_serial_number()), Answer)
+radio.on_received_number(on_received_number)
 
 def Voting(Decision):
-    global Lock
     if Server_running == True:
-        Lock = Decision
-        basic.show_string(Lock)
+        basic.show_string(Decision)
     elif Server_running == False:
         basic.show_string("Hlasování nezačalo!")
 
