@@ -1,9 +1,10 @@
-// dodělat odesílání hodnoty (Decision/Answer); předělat Server podle klienta
+// předělat Server podle klienta
 radio.setGroup(100)
 let Decision = ""
 let Server_running = false
 let Answer = 64
 radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
+    let Answer: number;
     
     if (receivedNumber == 1) {
         basic.showString("Start!")
@@ -12,7 +13,19 @@ radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     } else if (receivedNumber == 0) {
         basic.showString("End!")
         Server_running = false
-        radio.sendValue("" + control.deviceSerialNumber(), Answer)
+        if (Decision == "A") {
+            Answer = 65
+        } else if (Decision == "B") {
+            Answer = 66
+        } else if (Decision == "C") {
+            Answer = 67
+        } else if (Decision == "D") {
+            Answer = 68
+        } else if (Decision == "E") {
+            Answer = 69
+        }
+        
+        radio.sendValue("answer", Answer)
     }
     
 })

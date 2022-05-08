@@ -1,4 +1,4 @@
-#dodělat odesílání hodnoty (Decision/Answer); předělat Server podle klienta
+#předělat Server podle klienta
 
 radio.set_group(100)
 
@@ -15,7 +15,17 @@ def on_received_number(receivedNumber):
     elif receivedNumber == 0:
         basic.show_string("End!")
         Server_running = False
-        radio.send_value(str(control.device_serial_number()), Answer)
+        if Decision == "A":
+            Answer = 65
+        elif Decision == "B":
+            Answer = 66
+        elif Decision == "C":
+            Answer = 67
+        elif Decision == "D":
+            Answer = 68
+        elif Decision == "E":
+            Answer = 69
+        radio.send_value("answer", Answer)
 radio.on_received_number(on_received_number)
 
 def Voting(Decision):
