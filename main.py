@@ -1,6 +1,5 @@
-#předělat Server podle klienta
-
 radio.set_group(100)
+radio.set_transmit_serial_number(True)
 
 Decision = ""
 Server_running = False
@@ -11,7 +10,9 @@ def on_received_number(receivedNumber):
     if receivedNumber == 1:
         basic.show_string("Start!")
         Server_running = True
-        radio.send_string(str(control.device_serial_number()))
+        radio.send_value("serial_number", control.device_serial_number())
+        radio.set_group(101)
+        radio.on_received_string(on_received_string)
     elif receivedNumber == 0:
         basic.show_string("End!")
         Server_running = False
@@ -27,6 +28,9 @@ def on_received_number(receivedNumber):
             Answer = 69
         radio.send_value("answer", Answer)
 radio.on_received_number(on_received_number)
+
+def on_received_string(receivedString):
+    radio.set_group(100)
 
 def Voting(Decision):
     if Server_running == True:

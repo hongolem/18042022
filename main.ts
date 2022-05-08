@@ -1,5 +1,5 @@
-// předělat Server podle klienta
 radio.setGroup(100)
+radio.setTransmitSerialNumber(true)
 let Decision = ""
 let Server_running = false
 let Answer = 64
@@ -9,7 +9,11 @@ radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
     if (receivedNumber == 1) {
         basic.showString("Start!")
         Server_running = true
-        radio.sendString("" + control.deviceSerialNumber())
+        radio.sendValue("serial_number", control.deviceSerialNumber())
+        radio.setGroup(101)
+        radio.onReceivedString(function on_received_string(receivedString: string) {
+            radio.setGroup(100)
+        })
     } else if (receivedNumber == 0) {
         basic.showString("End!")
         Server_running = false
